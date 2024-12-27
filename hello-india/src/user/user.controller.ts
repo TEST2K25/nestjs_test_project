@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserSignUpDto } from './dto/user-signup.dto';
-// import { UserLoginDto } from './dto/user-login.dto';
+import { UserLoginDto } from './dto/user-login.dto';
 // import { JwtAuthGuard } from 'src/auth/auth.guard';
 // import { Req_Int } from 'src/interface/common';
 // import {
@@ -27,10 +27,10 @@ export class UserController {
     return this.userService.userSignUp(userSignUpDto);
   }
   // to login user
-  // @Post('user-login')
-  // async userLogin(@Body() userLoginDto: UserLoginDto) {
-  //   return this.userService.userLogin(userLoginDto);
-  // }
+  @Post('user-login')
+  async userLogin(@Body() userLoginDto: UserLoginDto) {
+    return this.userService.userLogin(userLoginDto);
+  }
 
   // get-user details
   // @UseGuards(JwtAuthGuard)

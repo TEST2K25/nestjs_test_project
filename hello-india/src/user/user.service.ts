@@ -9,7 +9,7 @@ import { Model } from 'mongoose';
 import { ResetPassword } from './entities/reset.entity';
 import { UserSignUpDto } from './dto/user-signup.dto';
 import * as bcrypt from 'bcrypt';
-// import { UserLoginDto } from './dto/user-login.dto';
+import { UserLoginDto } from './dto/user-login.dto';
 // import { AuthService } from 'src/auth/auth.service';
 // import {
 //   ChnagePasswordDto,
@@ -66,52 +66,53 @@ export class UserService {
     }
   }
   // user login
-  // async userLogin(userLoginDto: UserLoginDto) {
-  //   try {
-  //     // check user exist or not
-  //     const user = await this.userModel.findOne({
-  //       userEmail: userLoginDto.userEmail,
-  //     });
+  async userLogin(userLoginDto: UserLoginDto) {
+    console.log('this is the best way');
+    try {
+      // check user exist or not
+      const user = await this.userModel.findOne({
+        userEmail: userLoginDto.userEmail,
+      });
 
-  //     // error if user does not exists
-  //     if (!user) {
-  //       throw new UnauthorizedException("User does't exists");
-  //     }
+      // error if user does not exists
+      if (!user) {
+        throw new UnauthorizedException("User does't exists");
+      }
 
-  //     // confirm password
-  //     const isPasswordCorrect = await bcrypt.compare(
-  //       userLoginDto.password,
-  //       user.password,
-  //     );
+      // confirm password
+      const isPasswordCorrect = await bcrypt.compare(
+        userLoginDto.password,
+        user.password,
+      );
 
-  //     // console.log('Matched password of bcrypt is:-', isPasswordCorrect);
-  //     if (!isPasswordCorrect) {
-  //       throw new UnauthorizedException('Incorrect password');
-  //     }
+      // console.log('Matched password of bcrypt is:-', isPasswordCorrect);
+      if (!isPasswordCorrect) {
+        throw new UnauthorizedException('Incorrect password');
+      }
 
-  //     const token = this.authServices.generateToken(
-  //       userLoginDto.userEmail,
-  //       user._id as string,
-  //     );
+      // const token = this.authServices.generateToken(
+      //   userLoginDto.userEmail,
+      //   user._id as string,
+      // );
 
-  //     // console.log('Generated token is:-', token);
+      // console.log('Generated token is:-', token);
 
-  //     return {
-  //       message: 'Login Successfully!',
-  //       data: {
-  //         token: token,
-  //         data: {
-  //           userName: user.userName,
-  //           userEmail: user.userEmail,
-  //           userId: user._id,
-  //           accessType: user.accessType,
-  //         },
-  //       },
-  //     };
-  //   } catch (error) {
-  //     throw new UnauthorizedException(error.message);
-  //   }
-  // }
+      return {
+        message: 'Login Successfully!',
+        data: {
+          // token: token,
+          data: {
+            userName: user.userName,
+            userEmail: user.userEmail,
+            userId: user._id,
+            accessType: user.accessType,
+          },
+        },
+      };
+    } catch (error) {
+      throw new UnauthorizedException(error.message);
+    }
+  }
   // get user details when valid token is present
   // async userGetDetails(authUser) {
   //   //  user details after auth guard
