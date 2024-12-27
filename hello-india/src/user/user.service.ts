@@ -10,7 +10,7 @@ import { ResetPassword } from './entities/reset.entity';
 import { UserSignUpDto } from './dto/user-signup.dto';
 import * as bcrypt from 'bcrypt';
 import { UserLoginDto } from './dto/user-login.dto';
-// import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from 'src/auth/auth.service';
 // import {
 //   ChnagePasswordDto,
 //   ResetEmailDto,
@@ -23,7 +23,7 @@ export class UserService {
     @InjectModel(User.name) private readonly userModel: Model<User>,
     @InjectModel(ResetPassword.name)
     private readonly resetPasswordModel: Model<ResetPassword>,
-    // private readonly authServices: AuthService,
+    private readonly authServices: AuthService,
   ) {}
 
   //user singup
@@ -90,17 +90,17 @@ export class UserService {
         throw new UnauthorizedException('Incorrect password');
       }
 
-      // const token = this.authServices.generateToken(
-      //   userLoginDto.userEmail,
-      //   user._id as string,
-      // );
+      const token = this.authServices.generateToken(
+        userLoginDto.userEmail,
+        user._id as string,
+      );
 
-      // console.log('Generated token is:-', token);
+      console.log('Generated token is:-', token);
 
       return {
         message: 'Login Successfully!',
         data: {
-          // token: token,
+          token: token,
           data: {
             userName: user.userName,
             userEmail: user.userEmail,
