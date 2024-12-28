@@ -4,7 +4,8 @@ import { UserService } from './user.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './entities/user.entity';
 import { ResetPassword, ResetPasswordSchema } from './entities/reset.entity';
-import { AuthModule } from 'src/auth/auth.module';
+// import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [

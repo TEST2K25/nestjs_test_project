@@ -8,11 +8,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    // PassportModule.register({ defaultStrategy: 'jwt' }),
-    // JwtModule.register({
-    //   secret: 'djkaqYUiiHJbbjghtiugjbiuvvgfufhnvnb',
-    //   signOptions: { expiresIn: '1h' },
-    // }),
     ConfigModule, // Import ConfigModule
     PassportModule,
     JwtModule.registerAsync({

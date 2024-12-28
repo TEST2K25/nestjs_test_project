@@ -10,7 +10,8 @@ import { ResetPassword } from './entities/reset.entity';
 import { UserSignUpDto } from './dto/user-signup.dto';
 import * as bcrypt from 'bcrypt';
 import { UserLoginDto } from './dto/user-login.dto';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
+// import { AuthService } from 'src/auth/auth.service';
 // import {
 //   ChnagePasswordDto,
 //   ResetEmailDto,
